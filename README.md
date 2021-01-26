@@ -1,4 +1,6 @@
-# Conda recipe for SBOL2
+# conda recipe for SBOL2
+
+Instructions for building conda recipe for [pySBOL2](https://github.com/SynBioDex/pySBOL2).
 
 ## Prerequisite
 
