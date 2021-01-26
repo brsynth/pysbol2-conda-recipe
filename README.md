@@ -25,6 +25,12 @@ source .secrets
 anaconda --token ${ANACONDA_TOKEN} upload --user ${ANACONDA_USER} --label main /path/to/conda-bld/package-name.tar.bz2
 ```
 
+## What to do on next package release?
+
+When ever a new version is released on pypi, here how to proceed:
+- Update `{% set version = "1.2" %}` to the correct number in `recipe/meta.yaml`.
+- Repeat steps 1-3 from above.
+
 ## Miscellaneous
 
 Content generated with the help of [Grayskull](https://github.com/conda-incubator/grayskull).
