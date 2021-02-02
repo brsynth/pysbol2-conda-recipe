@@ -12,18 +12,17 @@ source:
 
 build:
   number: 0
-  noarch: python
   script: {{ PYTHON }} -m pip install --no-deps . -vv
 
 requirements:
   host:
+    - python {{ python }}
     - pip
-    - python >=3.4
   run:
+    - python {{ python }}
     - deprecated
     - lxml
     - packaging >=20.0
-    - python >=3.4
     - python-dateutil
     - rdflib >=5.0
     - requests
