@@ -16,15 +16,35 @@ conda env create --file recipe/conda_build_env.yaml -n conda_build_env
 
 2. Build
 ```shell
+# Few variables for convenience
+CONDA_BLD_PATH=/tmp/conda-bld
+PLATFORM=$(conda info | grep platform | sed 's/.*platform : //')
+PACKAGE=sbol2
+
 # From the recipe sub folder
 conda activate conda_build_env
-conda build recipe
+conda build recipe --output-folder ${CONDA_BLD_PATH}
 ```
 
-3. Publish
+3. Convert for other platform
+```shell
+conda convert \
+    --platform osx-64 \
+    --platform linux-64 \
+    --platform win-64 \
+    --output-dir ${CONDA_BLD_PATH} \
+	${CONDA_BLD_PATH}/${PLATFORM}/${PACKAGE}-*.tar.bz2
+```
+
+4. Publish
 ```shell
 source .secrets
-anaconda --token ${ANACONDA_TOKEN} upload --user ${ANACONDA_USER} --label main /path/to/conda-bld/package-name.tar.bz2
+anaconda \
+    --token ${ANACONDA_TOKEN} \
+    upload \
+    --user ${ANACONDA_USER} \
+    --label main \
+    ${CONDA_BLD_PATH}/*/${PACKAGE}-*.tar.bz2
 ```
 
 ## What to do on next package release?
